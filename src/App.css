@@ -1,0 +1,20 @@
+.pokemonCard {
+  display: flex;
+  flex-direction: row;
+
+  max-width: 500px;
+}
+
+.imageWrapper {
+  flex: 1;
+}
+
+.image {
+  width: 200px;
+  height: 200px;
+}
+
+.content {
+  padding: 20px;
+  flex: 1;
+}
