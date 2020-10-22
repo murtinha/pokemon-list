@@ -108,10 +108,20 @@ function App() {
   });
 
   return (
-    <div className="App">
+    <div className="app">
+      <h1 className="title">Quem é esse pokemon?</h1>
       <ul className="pokemonList" ref={infinitRef}>
         {state.pokemons.map((pokemon) => (
-          <li key={pokemon.name}>{pokemon.name}</li>
+          <li className="pokemonItem" key={pokemon.name}>
+            <img
+              width={200}
+              height={250}
+              className="pokemonImage"
+              src={pokemon.imageUrl}
+              alt="Imagem não existente"
+            />
+            <div className="pokemonName">{pokemon.name}</div>
+          </li>
         ))}
       </ul>
     </div>
