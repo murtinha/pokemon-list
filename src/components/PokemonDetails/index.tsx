@@ -65,7 +65,7 @@ export default function PokemonDetails() {
 
       handleSetState({ loading: false, pokemonDetails });
     });
-  }, []);
+  }, [pokemon?.id]);
 
   function renderAbilities() {
     return state.pokemonDetails?.abilities.map((ability) => (
