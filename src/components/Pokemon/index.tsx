@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { PokemonType } from "../../types";
 
+import { PokemonType } from "../../types";
 import PokemonDetails from "../PokemonDetails";
+
+import "./styles.css";
 
 type Props = {
   pokemon: PokemonType;
@@ -13,9 +15,7 @@ export default function Pokemon({ pokemon }: Props) {
 
   return (
     <div
-      onClick={() => {
-        setShowDetails(!showDetails);
-      }}
+      onClick={() => setShowDetails(true)}
       className="pokemonItem"
       key={name}
     >
@@ -29,10 +29,7 @@ export default function Pokemon({ pokemon }: Props) {
       <div className="pokemonName">{name}</div>
       {showDetails && (
         <PokemonDetails
-          onClose={() => {
-            console.log("CLOSE");
-            setShowDetails(false);
-          }}
+          onClose={() => setShowDetails(false)}
           pokemon={pokemon}
         />
       )}

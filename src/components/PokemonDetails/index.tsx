@@ -8,6 +8,7 @@ import {
   PokemonAbilityResponse,
 } from "../../types";
 
+import "./styles.css";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 type Props = {
@@ -55,10 +56,15 @@ export default function PokemonDetails({ pokemon, onClose }: Props) {
 
           return { effect, name: ability.name };
         }),
-        forms: formsResponse.map((form) => ({
-          isBattleOnly: `${form.is_battle_only}`,
-          isMega: `${form.is_mega}`,
-        })),
+        forms: formsResponse.map((form) => {
+          function parseFormValues(value: boolean): "Yes" | "No" {
+            return value ? "Yes" : "No";
+          }
+          return {
+            isBattleOnly: parseFormValues(form.is_battle_only),
+            isMega: parseFormValues(form.is_mega),
+          };
+        }),
       };
 
       handleSetState({ loading: false, pokemonDetails });
