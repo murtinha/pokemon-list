@@ -2,6 +2,7 @@ This project uses this [PokemonAPI](https://pokeapi.co/docs/v2) to fetch data fr
 
 ## Steps to run
 
-`yarn install` - install the packages
-`yarn dev` - runs the project on http://localhost:3000/
+1 -`yarn install` - install the packages
+
+2 - `yarn dev` - runs the project on http://localhost:3000/
 
