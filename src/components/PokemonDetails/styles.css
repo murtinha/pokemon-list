@@ -1,9 +1,10 @@
 .pokemonDetails {
   background-color: #f8f8f8;
+  padding: 20px;
   cursor: default;
   position: fixed;
-  width: 75vw;
-  height: 75vh;
+  width: 75%;
+  height: 75%;
   top: 10%;
   left: 15%;
   z-index: 2;
@@ -47,11 +48,9 @@
 }
 
 .pokemonAbilities {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  height: calc(100% - 100px);
+  margin-top: 30px;
   overflow-y: auto;
+  height: calc(100% - 150px);
 }
 .detailRow {
   display: flex;
@@ -69,7 +68,40 @@
   flex: 1;
 }
 
+.formDetails {
+  display: flex;
+  justify-content: center;
+}
+
 .loaderWrapper {
   display: flex;
   justify-content: center;
+}
+
+@media (max-width: 800px) {
+  .pokemonDetails {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    padding: 0;
+    right: 0;
+    left: 0;
+  }
+  .pokemonDetailsContent {
+    flex: 1;
+    flex-direction: column;
+  }
+  .leftSide .pokemonImage {
+    width: 150px;
+    height: 150px;
+  }
+  .pokemonDetailsHeader {
+    padding-right: 40px;
+  }
+  .pokemonAbilities {
+    overflow-y: auto;
+    margin-top: 0;
+    padding: 15px 8px 0px;
+  }
 }

@@ -15,3 +15,10 @@
   font-weight: bold;
   text-align: center;
 }
+
+@media (max-width: 800px) {
+  .pokemonItem {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}

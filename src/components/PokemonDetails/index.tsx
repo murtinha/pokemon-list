@@ -78,7 +78,7 @@ export default function PokemonDetails() {
 
   function renderForms() {
     return state.pokemonDetails?.forms.map((form, idx) => (
-      <div key={idx} className="detailRow">
+      <div key={idx} className="detailRow formDetails">
         <span className="detailTitle">Battle Only: {form.isBattleOnly}</span>
         <span className="detailTitle">Mega: {form.isMega}</span>
       </div>
