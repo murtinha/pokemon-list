@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { PokemonType } from "../../types";
-import PokemonDetails from "../PokemonDetails";
+import { useModalContext } from "../../context";
 
 import "./styles.css";
 
@@ -11,11 +11,11 @@ type Props = {
 
 export default function Pokemon({ pokemon }: Props) {
   const { name, imageUrl } = pokemon;
-  const [showDetails, setShowDetails] = useState(false);
+  const { setContext } = useModalContext();
 
   return (
     <div
-      onClick={() => setShowDetails(true)}
+      onClick={() => setContext({ showModal: true, pokemon })}
       className="pokemonItem"
       key={name}
     >
@@ -27,12 +27,6 @@ export default function Pokemon({ pokemon }: Props) {
         alt="Imagem não existente"
       />
       <div className="pokemonName">{name}</div>
-      {showDetails && (
-        <PokemonDetails
-          onClose={() => setShowDetails(false)}
-          pokemon={pokemon}
-        />
-      )}
     </div>
   );
 }

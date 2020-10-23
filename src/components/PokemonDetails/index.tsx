@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Loader from "react-loader-spinner";
 import {
-  PokemonType,
   PokemonDetailsType,
   PokemonDetailsResponse,
   PokemonFormResponse,
@@ -10,11 +9,7 @@ import {
 
 import "./styles.css";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-
-type Props = {
-  pokemon: PokemonType;
-  onClose: () => void;
-};
+import { useModalContext } from "../../context";
 
 type State = {
   pokemonDetails: PokemonDetailsType | null;
@@ -25,18 +20,19 @@ function fetchData<T>(url: string): Promise<T> {
   return fetch(url).then((data) => data.json());
 }
 
-export default function PokemonDetails({ pokemon, onClose }: Props) {
+export default function PokemonDetails() {
   const [state, setState] = useState<State>({
     pokemonDetails: null,
     loading: true,
   });
+  const { setContext, pokemon } = useModalContext();
 
   function handleSetState(newState: Object) {
     setState({ ...state, ...newState });
   }
 
   useEffect(() => {
-    const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${pokemon.id}`;
+    const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${pokemon?.id}`;
     fetchData<PokemonDetailsResponse>(pokemonUrl).then(async (details) => {
       const { abilities, forms } = details;
       const abilitiesResponse = await Promise.all(
@@ -73,7 +69,7 @@ export default function PokemonDetails({ pokemon, onClose }: Props) {
 
   function renderAbilities() {
     return state.pokemonDetails?.abilities.map((ability) => (
-      <div className="detailRow">
+      <div key={ability.name} className="detailRow">
         <span className="detailTitle">{ability.name}: </span>
         <span>{ability.effect}</span>
       </div>
@@ -81,8 +77,8 @@ export default function PokemonDetails({ pokemon, onClose }: Props) {
   }
 
   function renderForms() {
-    return state.pokemonDetails?.forms.map((form) => (
-      <div className="detailRow">
+    return state.pokemonDetails?.forms.map((form, idx) => (
+      <div key={idx} className="detailRow">
         <span className="detailTitle">Battle Only: {form.isBattleOnly}</span>
         <span className="detailTitle">Mega: {form.isMega}</span>
       </div>
@@ -92,7 +88,10 @@ export default function PokemonDetails({ pokemon, onClose }: Props) {
   return (
     <div className="pokemonDetails">
       <div className="pokemonDetailsHeader">
-        <div onClick={onClose} className="closeButton">
+        <div
+          onClick={() => setContext({ showModal: false })}
+          className="closeButton"
+        >
           Fechar
         </div>
       </div>
@@ -102,12 +101,12 @@ export default function PokemonDetails({ pokemon, onClose }: Props) {
             width={300}
             height={300}
             className="pokemonImage"
-            src={pokemon.imageUrl}
+            src={pokemon?.imageUrl}
             alt="Imagem não existente"
           />
         </div>
         <div className="rightSide">
-          <h2 className="pokemonDetailsTitle">{pokemon.name}</h2>
+          <h2 className="pokemonDetailsTitle">{pokemon?.name}</h2>
           {state.loading ? (
             <div className="loaderWrapper">
               <Loader type="ThreeDots" color="#00BFFF" height={50} width={50} />

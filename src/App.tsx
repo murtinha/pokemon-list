@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 
 import { PokemonType, Response, ResponseResults } from "./types";
-
 import Pokemon from "./components/Pokemon";
+import { ModalContext, ContextValues } from "./context";
+
 import "./App.css";
+import PokemonDetails from "./components/PokemonDetails";
 
 type State = {
   pokemons: Array<PokemonType>;
@@ -41,6 +43,10 @@ function App() {
     loading: false,
     limit: 0,
   });
+  const [contextValues, setContextValues] = useState<ContextValues>({
+    pokemon: null,
+    showModal: false,
+  });
 
   function handleSetState(newState: Object) {
     setState({ ...state, ...newState });
@@ -62,6 +68,10 @@ function App() {
     });
   }
 
+  function setContext(newContext: Object) {
+    setContextValues({ ...contextValues, ...newContext });
+  }
+
   const infinitRef = useInfiniteScroll<HTMLDivElement>({
     hasNextPage: state.hasNextPage,
     loading: state.loading,
@@ -69,14 +79,17 @@ function App() {
   });
 
   return (
-    <div className="app">
-      <h1 className="title">Quem é esse pokemon?</h1>
-      <div className="pokemonList" ref={infinitRef}>
-        {state.pokemons.map((pokemon) => (
-          <Pokemon key={pokemon.name} pokemon={pokemon} />
-        ))}
+    <ModalContext.Provider value={{ ...contextValues, setContext }}>
+      <div className="app">
+        <h1 className="title">Quem é esse pokemon?</h1>
+        <div className="pokemonList" ref={infinitRef}>
+          {state.pokemons.map((pokemon) => (
+            <Pokemon key={pokemon.name} pokemon={pokemon} />
+          ))}
+        </div>
       </div>
-    </div>
+      {contextValues.showModal && <PokemonDetails />}
+    </ModalContext.Provider>
   );
 }
 
