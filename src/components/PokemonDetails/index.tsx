@@ -44,8 +44,8 @@ export default function PokemonDetails({ pokemon, onClose }: Props) {
           return { effect, name: ability.name };
         }),
         forms: formsResponse.map((form) => ({
-          isBattleOnly: form.is_battle_only,
-          isMega: form.is_mega,
+          isBattleOnly: `${form.is_battle_only}`,
+          isMega: `${form.is_mega}`,
         })),
       };
 
@@ -55,9 +55,19 @@ export default function PokemonDetails({ pokemon, onClose }: Props) {
 
   function renderAbilities() {
     return pokemonDetails?.abilities.map((ability) => (
-      <div className="pokemonAbility">
-        <span className="abilityName">{ability.name}: </span>
-        <span className="abilityEffect">{ability.effect}</span>
+      <div className="detailRow">
+        <span className="detailTitle">{ability.name}: </span>
+        <span>{ability.effect}</span>
+      </div>
+    ));
+  }
+
+  function renderForms() {
+    console.log(pokemonDetails);
+    return pokemonDetails?.forms.map((form) => (
+      <div className="detailRow">
+        <span className="detailTitle">Battle Only: {form.isBattleOnly}</span>
+        <span className="detailTitle">Mega: {form.isMega}</span>
       </div>
     ));
   }
@@ -82,6 +92,7 @@ export default function PokemonDetails({ pokemon, onClose }: Props) {
         <div className="rightSide">
           <h2 className="pokemonDetailsTitle">{pokemon.name}</h2>
           <div className="pokemonAbilities">
+            {pokemonDetails && renderForms()}
             {pokemonDetails && renderAbilities()}
           </div>
         </div>

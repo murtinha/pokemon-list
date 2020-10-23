@@ -14,9 +14,7 @@ export default function Pokemon({ pokemon }: Props) {
   return (
     <div
       onClick={() => {
-        if (!showDetails) {
-          setShowDetails(true);
-        }
+        setShowDetails(!showDetails);
       }}
       className="pokemonItem"
       key={name}

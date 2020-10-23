@@ -33,7 +33,7 @@ export interface PokemonFormResponse {
 
 export interface PokemonDetailsType {
   abilities: Array<{ name: string; effect: string }>;
-  forms: Array<{ isBattleOnly: boolean; isMega: boolean }>;
+  forms: Array<{ isBattleOnly: string; isMega: string }>;
 }
 
 export interface ResponseResults {
