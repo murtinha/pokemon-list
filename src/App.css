@@ -10,7 +10,6 @@ h1.title {
 
 .pokemonList {
   display: flex;
-  list-style: none;
   flex-wrap: wrap;
   justify-content: space-between;
 }
@@ -30,5 +29,52 @@ h1.title {
 .pokemonName {
   font-size: 20px;
   font-weight: bold;
+  text-align: center;
+}
+
+.pokemonDetails {
+  background-color: #f8f8f8;
+  cursor: default;
+  position: fixed;
+  width: 75vw;
+  height: 75vh;
+  top: 10%;
+  left: 15%;
+  z-index: 2;
+  transition: width 0.1s ease-in-out;
+  border: 1px solid #f8f8f8;
+  box-shadow: 4px solid black;
+  display: flex;
+  flex-direction: column;
+}
+
+.pokemonDetailsHeader {
+  display: flex;
+  height: 30px;
+  padding: 10px;
+  flex-direction: row-reverse;
+}
+
+.closeButton {
+  cursor: pointer;
+}
+
+.pokemonDetailsContent {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.leftSide {
+  flex: 0.5;
+  height: 100%;
+}
+.rightSide {
+  flex: 1;
+  height: 100%;
+}
+
+.pokemonDetailsTitle {
+  font-size: 40px;
   text-align: center;
 }
