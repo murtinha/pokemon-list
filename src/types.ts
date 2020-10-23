@@ -22,10 +22,8 @@ export interface PokemonDetailsResponse extends PokemonType {
 }
 
 export interface PokemonAbilityResponse {
-  effect_entries: Array<{ effect: string }>;
-  generation: {
-    name: string;
-  };
+  effect_entries: Array<{ language: { name: string }; effect: string }>;
+  name: string;
 }
 
 export interface PokemonFormResponse {
@@ -34,7 +32,7 @@ export interface PokemonFormResponse {
 }
 
 export interface PokemonDetailsType {
-  abilities: Array<{ generation: string; effect: string }>;
+  abilities: Array<{ name: string; effect: string }>;
   forms: Array<{ isBattleOnly: boolean; isMega: boolean }>;
 }
 

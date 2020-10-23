@@ -76,5 +76,28 @@ h1.title {
 
 .pokemonDetailsTitle {
   font-size: 40px;
+  margin: 0;
   text-align: center;
+}
+
+.pokemonAbilities {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.pokemonAbility {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+}
+
+.abilityName {
+  font-size: 20px;
+  margin-right: 12px;
+  font-weight: bold;
+}
+
+.pokemonForms {
+  flex: 1;
 }

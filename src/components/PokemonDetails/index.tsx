@@ -36,18 +36,31 @@ export default function PokemonDetails({ pokemon, onClose }: Props) {
       );
 
       const pokemonDetails = {
-        abilities: abilitiesResponse.map((ability) => ({
-          effect: ability.effect_entries[0].effect,
-          generation: ability.generation.name,
-        })),
+        abilities: abilitiesResponse.map((ability) => {
+          const effect =
+            ability.effect_entries.find((efct) => efct.language.name === "en")
+              ?.effect || "";
+
+          return { effect, name: ability.name };
+        }),
         forms: formsResponse.map((form) => ({
           isBattleOnly: form.is_battle_only,
           isMega: form.is_mega,
         })),
       };
-      console.log(pokemonDetails);
+
+      setPokemonDetails(pokemonDetails);
     });
   }, []);
+
+  function renderAbilities() {
+    return pokemonDetails?.abilities.map((ability) => (
+      <div className="pokemonAbility">
+        <span className="abilityName">{ability.name}: </span>
+        <span className="abilityEffect">{ability.effect}</span>
+      </div>
+    ));
+  }
 
   return (
     <div className="pokemonDetails">
@@ -68,6 +81,9 @@ export default function PokemonDetails({ pokemon, onClose }: Props) {
         </div>
         <div className="rightSide">
           <h2 className="pokemonDetailsTitle">{pokemon.name}</h2>
+          <div className="pokemonAbilities">
+            {pokemonDetails && renderAbilities()}
+          </div>
         </div>
       </div>
     </div>
